@@ -1,0 +1,211 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Форма регистрации</title>-->
+<!--    <link rel="stylesheet" href="../static/style.css"> &lt;!&ndash; Подключение файла CSS &ndash;&gt;-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="form-style-10">-->
+<!--        <h1>Форма регистрации</h1>-->
+<!--        <form action="#" method="post">-->
+<!--            <div class="inner-wrap">-->
+
+<!--                 &lt;!&ndash; Фамилия &ndash;&gt;-->
+<!--                <label for="last_name">Фамилия (обязательно):</label>-->
+<!--                <input type="text" id="last_name" name="last_name" required>-->
+
+<!--                &lt;!&ndash; Имя &ndash;&gt;-->
+<!--                <label for="first_name">Имя (обязательно):</label>-->
+<!--                <input type="text" id="first_name" name="first_name" required>-->
+
+<!--                &lt;!&ndash; Отчество &ndash;&gt;-->
+<!--                <label for="middle_name">Отчество (обязательно):</label>-->
+<!--                <input type="text" id="middle_name" name="middle_name" required>-->
+
+<!--                &lt;!&ndash; Дата рождения &ndash;&gt;-->
+<!--                <label for="birth_date">Дата рождения (обязательно):</label>-->
+<!--                <input type="date" id="birth_date" name="birth_date" required>\-->
+
+<!--                 &lt;!&ndash; Пол &ndash;&gt;-->
+<!--                <p>Пол (обязательно):</p>-->
+<!--                <input type="radio" id="male" name="gender" value="Мужской" required>-->
+<!--                <label for="male">Мужской</label>-->
+<!--                <input type="radio" id="female" name="gender" value="Женский">-->
+<!--                <label for="female">Женский</label>-->
+
+<!--                &lt;!&ndash; Серия паспорта &ndash;&gt;-->
+<!--                <label for="passport_series">Серия паспорта (обязательно):</label>-->
+<!--                <input type="text" id="passport_series" name="passport_series" required>-->
+
+<!--                &lt;!&ndash; Номер паспорта &ndash;&gt;-->
+<!--                <label for="passport_number">Номер паспорта (с маской, обязательно):</label>-->
+<!--                <input type="text" id="passport_number" name="passport_number" pattern="\d{6}" placeholder="123456" required>-->
+
+<!--                &lt;!&ndash; Кем выдан &ndash;&gt;-->
+<!--                <label for="issued_by">Кем выдан (обязательно):</label>-->
+<!--                <input type="text" id="issued_by" name="issued_by" required>-->
+
+<!--                 &lt;!&ndash; Дата выдачи &ndash;&gt;-->
+<!--                <label for="issue_date">Дата выдачи (обязательно):</label>-->
+<!--                <input type="date" id="issue_date" name="issue_date" required>-->
+
+<!--                &lt;!&ndash; Идентификационный номер &ndash;&gt;-->
+<!--                <label for="identification_number">Идентификационный номер (с маской, обязательно):</label>-->
+<!--                <input type="text" id="identification_number" name="identification_number" pattern="\d+" placeholder="" required>-->
+
+<!--                &lt;!&ndash; Место рождения &ndash;&gt;-->
+<!--                <label for="birth_place">Место рождения (обязательно):</label>-->
+<!--                <input type="text" id="birth_place" name="birth_place" required>-->
+
+<!--                &lt;!&ndash; Город фактического проживания &ndash;&gt;-->
+<!--                <label for="city_residence">Город фактического проживания (обязательно):</label>-->
+<!--                <select id="city_residence" name="city_residence" required>-->
+<!--                    <option value="">Выберите город...</option>-->
+<!--                    <option value="Москва">Москва</option>-->
+<!--                    <option value="Санкт-Петербург">Санкт-Петербург</option>-->
+<!--                    <option value="Новосибирск">Новосибирск</option>-->
+<!--                    <option value="Екатеринбург">Екатеринбург</option>-->
+<!--                    <option value="Казань">Казань</option>-->
+<!--                    &lt;!&ndash; Добавьте другие города при необходимости &ndash;&gt;-->
+<!--                </select>-->
+
+<!--                &lt;!&ndash; Адрес фактического проживания &ndash;&gt;-->
+<!--                <label for="address_residence">Адрес фактического проживания (обязательно):</label>-->
+<!--                <input type="text" id="address_residence" name="address_residence" required>-->
+
+<!--                &lt;!&ndash; Телефон домашний &ndash;&gt;-->
+<!--                <label for="home_phone">Телефон домашний:</label>-->
+<!--                <input type="text" id="home_phone" name="home_phone" pattern="\+7\d{10}" placeholder="+79991234567">-->
+
+<!--                &lt;!&ndash; Телефон мобильный &ndash;&gt;-->
+<!--                <label for="mobile_phone">Телефон мобильный:</label>-->
+<!--                <input type="text" id="mobile_phone" name="mobile_phone" pattern="\+7\d{10}" placeholder="+79991234567">-->
+
+<!--                &lt;!&ndash; E-mail &ndash;&gt;-->
+<!--                <label for="email">E-mail:</label>-->
+<!--                <input type="email" id="email" name="email">-->
+
+<!--                &lt;!&ndash; Семейное положение &ndash;&gt;-->
+<!--                <label for="marital_status">Семейное положение (обязательно):</label>-->
+<!--                <select id="marital_status" name="marital_status" required>-->
+<!--                    <option value="">Выберите...</option>-->
+<!--                    <option value="холост/не замужем">Холост/не замужем</option>-->
+<!--                    <option value="женат/замужем">Женат/замужем</option>-->
+<!--                    <option value="разведен/разведена">Разведен/разведена</option>-->
+<!--                    <option value="вдовец/вдова">Вдовец/вдова</option>-->
+<!--                </select>-->
+
+<!--                &lt;!&ndash; Гражданство &ndash;&gt;-->
+<!--                <label for="citizenship">Гражданство (обязательно):</label>-->
+<!--                <select id="citizenship" name="citizenship" required>-->
+<!--                    <option value="">Выберите...</option>-->
+<!--                    <option value="Россия">Россия</option>-->
+<!--                    <option value="Беларусь">Беларусь</option>-->
+<!--                    <option value="Украина">Украина</option>-->
+<!--                    <option value="Казахстан">Казахстан</option>-->
+<!--                    <option value="Другое">Другое</option>-->
+<!--                </select>-->
+
+<!--                &lt;!&ndash; Инвалидность &ndash;&gt;-->
+<!--                <label for="disability">Инвалидность (обязательно):</label>-->
+<!--                <select id="disability" name="disability" required>-->
+<!--                    <option value="">Выберите...</option>-->
+<!--                    <option value="нет">Нет</option>-->
+<!--                    <option value="1 группа">1 группа</option>-->
+<!--                    <option value="2 группа">2 группа</option>-->
+<!--                    <option value="3 группа">3 группа</option>-->
+<!--                </select>-->
+
+<!--                &lt;!&ndash; Пенсионер &ndash;&gt;-->
+<!--                <p>Пенсионер (обязательно):</p>-->
+<!--                <input type="checkbox" id="pensioner" name="pensioner">-->
+<!--                <label for ="pensioner">Да</label>-->
+
+<!--                &lt;!&ndash; Ежемесячный доход &ndash;&gt;-->
+<!--                <label for="monthly_income">Ежемесячный доход:</label>-->
+<!--                <input type="number" id="monthly_income" name="monthly_income">-->
+
+<!--                &lt;!&ndash; Военнообязанный &ndash;&gt;-->
+<!--                <label for="military_duty">Военнообязанный:</label>-->
+<!--                <input type="checkbox" id="military_duty" name="military_duty">-->
+
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Кнопка отправки формы &ndash;&gt;-->
+<!--            <div class="button-section">-->
+<!--                <input type="submit" value="Отправить">-->
+<!--            </div>-->
+
+<!--        </form>-->
+<!--    </div>-->
+<!--</body>-->
+<!--</html>-->
+
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="form-style-10">
+        <h1>Форма регистрации</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <!-- Фамилия -->
+            {{ form.surname.label }} {{ form.surname() }}
+
+            <!-- Имя -->
+            {{ form.f_name.label }} {{ form.f_name() }}
+
+            <!-- Отчество -->
+            {{ form.s_name.label }} {{ form.s_name() }}
+
+            <!-- Дата рождения -->
+            {{ form.birth_date.label }} {{ form.birth_date() }}
+
+            <!-- Серия паспорта -->
+            {{ form.passport_seria.label }} {{ form.passport_seria() }}
+
+            <!-- Номер паспорта -->
+            {{ form.passport_num.label }} {{ form.passport_num() }}
+
+            <!-- Кем выдан -->
+            {{ form.p_issued_by.label }} {{ form.p_issued_by() }}
+
+            <!-- Дата выдачи -->
+            {{ form.p_issued_date.label }} {{ form.p_issued_date() }}
+
+            <!-- Идент. номер -->
+            {{ form.p_ident_num.label }} {{ form.p_ident_num() }}
+
+            <!-- Адрес проживания -->
+            {{ form.address_residence.label }} {{ form.address_residence() }}
+
+            <!-- Телефон домашний -->
+            {{ form.home_number.label }} {{ form.home_number() }}
+
+            <!-- Телефон мобильный -->
+            {{ form.mobile_number.label }} {{ form.mobile_number() }}
+
+            <!-- E-mail -->
+            {{ form.e_mail.label }} {{ form.e_mail() }}
+
+            <!-- Город проживания -->
+            {{ form.city.label }} {{ form.city() }}
+
+            <!-- Семейное положение -->
+            {{ form.mat_stat.label }} {{ form.mat_stat() }}
+
+            <!-- Гражданство -->
+            {{ form.citizenship.label }} {{ form.citizenship() }}
+
+            <!-- Инвалидность -->
+            {{ form.disability.label }} {{ form.disability() }}
+
+
+            {{ form.submit() }}
+
+
+        </form>
+    </div>
+{% endblock %}
