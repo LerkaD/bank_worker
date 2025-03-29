@@ -53,3 +53,4 @@ class RegistrationForm(FlaskForm):
     # pensioner = BooleanField('Пенсионер', validators=[InputRequired()])
     # military_duty = CheckboxField('Военнообязанный', validators=[InputRequired()])
     submit = SubmitField('Отправить')
+

@@ -205,11 +205,13 @@ def add_new_person_in_database(data:dict) -> None:
         f_name = data['f_name'],
         s_name = data['s_name'],
         surname = data['surname'],
-        birth_date = datetime.strptime(data['birthdate'], "%Y-%m-%d").date(),
+        # birth_date = datetime.strptime(data['birthdate'], "%Y-%m-%d").date(),
+        birth_date = data['birthdate'],
         passport_seria=data['passport_seria'],
         passport_num = data['passport_num'],
         p_issued_by = data['p_issued_by'],
-        p_issued_date = datetime.strptime(data['p_issued_date'], "%Y-%m-%d").date(),
+        # p_issued_date = datetime.strptime(data['p_issued_date'], "%Y-%m-%d").date(),
+        p_issued_date = data['p_issued_date'],
         p_ident_num = data['p_ident_num']
     )
 
@@ -232,9 +234,11 @@ def add_new_person_in_database(data:dict) -> None:
         mobile_number = data['mobile_number'],
         e_mail =  data['e_mail'],
         city_id = data['city'],
-        mat_stat_id = get_mat_stat_id(data['mat_stat']),
+        # mat_stat_id = get_mat_stat_id(data['mat_stat']),
+        mat_stat_id= data['mat_stat'],
         citizenship_id = data['citizenship_name'],
-        disability_id = get_disability_id(data['disability']),
+        # disability_id = get_disability_id(data['disability']),
+        disability_id= data['disability'],
         person_id = data['p_ident_num']
     )
 
@@ -271,10 +275,15 @@ def get_all_citizenship() -> List[Citizenship]:
 
 
 
+def get_simple_pers_info():
+    info = session.query(Person).all()
+    print(info)
+    return info
+
 # a = [(city.city_name, city.city_name) for city in get_all_cities()]
 # print(a)
 # Base.metadata.create_all(bind = engine)
 # insert_data()
 # add_new_person_in_database(data_example)
 # add_new_person_in_database(data_example_2)
-# delete_person_by_ident_num('9876543B002PB2')
+delete_person_by_ident_num('9876543B002PB2')
