@@ -78,7 +78,6 @@ def update_person_info()-> str:
         if update_check_f.validate_on_submit():
             ident_num = update_check_f.p_ident_num.data
             if check_by_p_ident_num(ident_num):
-                print(ident_num)
                 return redirect(url_for('update_person_info_by_ident', ident_num=ident_num))
             else:
                 return render_template('update_person.html', form=update_check_f, not_found=True)
@@ -111,7 +110,6 @@ def update_person_info_by_ident(ident_num: str)-> str:
                 "amount": update_form.amount.data,
                 "military_duty": update_form.military_duty.data
             }
-            print(update_person_data)
             update_person_in_database(ident_num, update_person_data)
             redirect('/persons')
         else:

@@ -203,7 +203,6 @@ def update_person_in_database(ident_num:str, data:dict )-> None:
     person.passport_num = data['passport_num']
     person.p_issued_by = data['p_issued_by']
     person.p_issued_date = data['p_issued_date']
-    person.p_ident_num = data['p_ident_num']
 
     person_info = session.query(PersonContactInfo).filter_by(person_id = ident_num).first()
     person_info.address_residence = data['address_residence']
