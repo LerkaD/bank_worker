@@ -4,7 +4,7 @@
     <title>
         Bank_site
     </title>
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style.css">
     <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
 
 </head>
@@ -13,10 +13,10 @@
     <hr>
     <div class="form-style-10">
         <nav>
-           <a href="{{ url_for('add_person') }}">Добавить</a>
+            <a href="{{ url_for('add_person') }}">Добавить</a>
             <a href="{{ url_for('delete_person') }}">Удалить</a>
-            <a href="{{ url_for('delete_person') }}">Обновить</a>
-            <a href="{{ url_for('delete_person') }}">Просмотреть</a>
+            <a href="{{ url_for('update_person_info') }}">Обновить</a>
+            <a href="{{ url_for('persons') }}">Просмотреть</a>
         </nav>
     </div>
 

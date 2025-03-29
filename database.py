@@ -59,7 +59,7 @@ class PersonContactInfo(Base):
     address_residence = Column(Text, nullable= False)
     home_number = Column(Text, nullable= True)
     mobile_number = Column(Text, nullable= True)
-    e_mail = Column(Text, nullable= True,unique= True, primary_key= True )
+    e_mail = Column(Text, nullable= True, primary_key= True )
     pensioner = Column(Boolean, nullable=False, default=False)
     military_duty = Column(Boolean, nullable=False, default=False)
     amount = Column(Float, nullable=True)
@@ -160,9 +160,6 @@ def add_new_person_in_database(data:dict) -> None:
         p_ident_num = data['p_ident_num']
     )
 
-    session.add(person)
-    session.commit()
-
     person_contact_info = PersonContactInfo(
         address_residence= data['address_residence'],
         home_number = data['home_number'],
@@ -178,6 +175,7 @@ def add_new_person_in_database(data:dict) -> None:
         person_id = data['p_ident_num']
     )
 
+    session.add(person)
     session.add(person_contact_info)
     session.commit()
 
@@ -186,8 +184,6 @@ def check_by_p_ident_num(ident_num:str) -> bool:
     person = session.query(Person).filter(Person.p_ident_num == ident_num).first()
     if person:
         return True
-    else:
-        return False
 
 def delete_person_by_ident_num(ident_num:str)-> None:
     person = session.query(Person).filter(Person.p_ident_num == ident_num).first()
@@ -195,8 +191,37 @@ def delete_person_by_ident_num(ident_num:str)-> None:
     session.commit()
 
 
-def update_person_in_database(ident_num:str)-> None:
-    ...
+def update_person_in_database(ident_num:str, data:dict )-> None:
+    person = session.query(Person).filter_by(p_ident_num=ident_num).first()
+    person.f_name = data['f_name']
+    person.s_name = data['s_name']
+    person.surname = data['surname']
+    person.birth_date = data['birthdate']
+    person.sex = data['sex']
+    person.passport_seria = data['passport_seria']
+    person.passport_num = data['passport_num']
+    person.p_issued_by = data['p_issued_by']
+    person.p_issued_date = data['p_issued_date']
+    person.p_ident_num = data['p_ident_num']
+
+    person_info = session.query(PersonContactInfo).filter_by(person_id = ident_num).first()
+    person_info.address_residence = data['address_residence']
+    if data['home_number']:
+        person_info.home_number = data['home_number']
+    if data['mobile_number']:
+        person_info.mobile_number = data['mobile_number']
+    if data['e_mail']:
+        person_info.e_mail = data['e_mail']
+    person_info.pensioner = data['pensioner']
+    person_info.military_duty = data['military_duty']
+    if data['amount']:
+        person_info.amount = data['amount']
+    person_info.city_id = data['city']
+    person_info.mat_stat_id = data['mat_stat']
+    person_info.citizenship_id = data['citizenship_name']
+    person_info.disability_id = data['disability']
+
+    session.commit()
 
 def get_all_cities() -> List[Cities]:
     all_cities = session.query(Cities).all()

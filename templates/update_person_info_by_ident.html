@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <div class="form-style-10">
+        <h1>Форма обновления данных</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <!-- Фамилия -->
+            {{ form.surname.label }} {{ form.surname() }}
+
+            <!-- Имя -->
+            {{ form.f_name.label }} {{ form.f_name() }}
+
+            <!-- Отчество -->
+            {{ form.s_name.label }} {{ form.s_name() }}
+
+            <!-- Дата рождения -->
+            {{ form.birth_date.label }} {{ form.birth_date() }}
+
+            <!-- пол -->
+            <!-- Для радиокнопок -->
+            {{ form.sex.label }}
+            {% for subfield in form.sex %}
+                {{ subfield }} {{ subfield.label }}
+            {% endfor %}
+
+            <!-- Серия паспорта -->
+            {{ form.passport_seria.label }} {{ form.passport_seria() }}
+
+            <!-- Номер паспорта -->
+            {{ form.passport_num.label }} {{ form.passport_num() }}
+
+            <!-- Кем выдан -->
+            {{ form.p_issued_by.label }} {{ form.p_issued_by() }}
+
+            <!-- Дата выдачи -->
+            {{ form.p_issued_date.label }} {{ form.p_issued_date() }}
+
+            <!-- Адрес проживания -->
+            {{ form.address_residence.label }} {{ form.address_residence() }}
+
+            <!-- Телефон домашний -->
+            {{ form.home_number.label }} {{ form.home_number() }}
+
+            <!-- Телефон мобильный -->
+            {{ form.mobile_number.label }} {{ form.mobile_number() }}
+
+            <!-- E-mail -->
+            {{ form.e_mail.label }} {{ form.e_mail() }}
+
+            <!-- Город проживания -->
+            {{ form.city.label }} {{ form.city() }}
+
+            <!-- Семейное положение -->
+            {{ form.mat_stat.label }} {{ form.mat_stat() }}
+
+            <!-- Гражданство -->
+            {{ form.citizenship.label }} {{ form.citizenship() }}
+
+            <!-- Инвалидность -->
+            {{ form.disability.label }} {{ form.disability() }}
+
+             <!--пенсионер-->
+            {{ form.pensioner.label }} {{ form.pensioner() }}
+
+            <!--ЗП-->
+            {{ form.amount.label }} {{ form.amount() }}
+
+             <!--военный-->
+            {{ form.military_duty.label }} {{ form.military_duty() }}
+
+            {{ form.submit() }}
+
+
+        </form>
+    </div>
+{% endblock %}

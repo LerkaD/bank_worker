@@ -18,7 +18,7 @@ def start() -> str:
     return render_template('base.html')
 
 @app.route('/persons', methods = ['GET'] )
-def all_persons() -> str:
+def persons() -> str:
     print(get_simple_pers_info)
     return render_template('person_info.html', persons = get_simple_pers_info())
 
@@ -52,7 +52,7 @@ def add_person() -> str:
             }
             print(new_person_data)
             add_new_person_in_database(new_person_data)
-            redirect('/persons')
+            return redirect('/persons')
         else:
             print("Ошибки валидации:", add_form.errors)
     return render_template('add_person.html', form = add_form)
@@ -77,13 +77,14 @@ def update_person_info()-> str:
         if update_check_f.validate_on_submit():
             ident_num = update_check_f.p_ident_num.data
             if check_by_p_ident_num(ident_num):
-                redirect(url_for('update_person_info_by_ident', ident_num=ident_num))
+                print(ident_num)
+                return redirect(url_for('update_person_info_by_ident', ident_num=ident_num))
             else:
-                return render_template('delete_person.html', form=update_check_f, not_found=True)
+                return render_template('update_person.html', form=update_check_f, not_found=True)
     return render_template('update_person.html', form = update_check_f, not_found = False)
 
-@app.route('/person/update/<str:ident_num>', methods = ['GET', 'POST'])
-def update_person_info_by_ident(ident_num)-> str:
+@app.route('/person/update/<string:ident_num>', methods = ['GET', 'POST'])
+def update_person_info_by_ident(ident_num: str)-> str:
     update_form = UpdateForm()
     if request.method == 'POST':
         if update_form.validate_on_submit():
@@ -110,7 +111,7 @@ def update_person_info_by_ident(ident_num)-> str:
                 "military_duty": update_form.military_duty.data
             }
             print(update_person_data)
-            update_person_in_database(update_person_data)
+            update_person_in_database(ident_num, update_person_data)
             redirect('/persons')
         else:
             print("Ошибки валидации:", update_form.errors)

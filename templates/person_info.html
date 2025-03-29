@@ -1,48 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>
-        Person info
-    </title>
-    <link rel="stylesheet" type="text/css" href="../static/style.css">
-    <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>Info about person:</h1>
+{% block content %}
+<!--<h5> Info about person:</h5>-->
 
-{% if persons %}
-<table class="customTable">
-    <thead>
-    <tr>
-        <th>Surname</th>
-        <th>Name</th>
-        <th>Second Name</th>
-        <th>Ident_num</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for person in persons %}
-    <tr>
-        <td>
-            {{ person.surname }}
-        </td>
-        <td>
-            {{ person.f_name }}
-        </td>
-        <td>
-            {{ person.s_name }}
-        </td>
-        <td>
-            {{ person.p_ident_num }}
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<h2> Sorry, we cant find anything.</h2>
-{% endif %}
+    {% if persons %}
+    <table class="customTable">
+        <thead>
+        <tr>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>Second Name</th>
+            <th>Ident_num</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in persons %}
+        <tr>
+            <td>
+                {{ person.surname }}
+            </td>
+            <td>
+                {{ person.f_name }}
+            </td>
+            <td>
+                {{ person.s_name }}
+            </td>
+            <td>
+                {{ person.p_ident_num }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h2> Sorry, we cant find anything.</h2>
+    {% endif %}
 
-</body>
-</html>
+{% endblock %}
