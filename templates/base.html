@@ -9,11 +9,22 @@
 
 </head>
 <body>
-<h1>The greatest bank site you have ever seen!</h1>
-<hr>
+    <h3>The greatest bank site you have ever seen!</h3>
+    <hr>
+    <div class="form-style-10">
+        <nav>
+           <a href="{{ url_for('add_person') }}">Добавить</a>
+            <a href="{{ url_for('delete_person') }}">Удалить</a>
+            <a href="{{ url_for('delete_person') }}">Обновить</a>
+            <a href="{{ url_for('delete_person') }}">Просмотреть</a>
+        </nav>
+    </div>
 
-{% block content %}{% endblock %}
+
+    {% block content %}{% endblock %}
 
 </body>
 </html>
+
+
 

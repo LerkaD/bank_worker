@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="form-style-10">
+        <h1>Форма обновления инфо из БД</h1>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <!-- Идент. номер -->
+            <div class="section">
+                {% if not_found %}
+
+                     <h6>Человека с таким идентификатором не существует. Ведите заново</h6>
+                {% else %}
+
+                    {{ form.p_ident_num.label }}
+                {% endif %}
+                {{ form.p_ident_num(class="form-style-10") }}
+                {% if form.p_ident_num.errors %}
+                    <div class="text-danger">
+                        {% for error in form.p_ident_num.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            {{ form.submit(class="btn btn-danger") }}
+        </form>
+    </div>
+{% endblock %}
