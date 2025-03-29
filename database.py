@@ -56,6 +56,7 @@ class Disability(Base):
 class PersonContactInfo(Base):
     __tablename__ = 'person_contact_info'
 
+
     address_residence = Column(Text, nullable= False)
     home_number = Column(Text, nullable= True)
     mobile_number = Column(Text, nullable= True)

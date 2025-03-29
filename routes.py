@@ -66,6 +66,7 @@ def delete_person()-> str:
             print(check_by_p_ident_num(ident_num))
             if check_by_p_ident_num(ident_num):
                 delete_person_by_ident_num(ident_num)
+                return redirect('/persons')
             else:
                 return render_template('delete_person.html', form=delete_form, not_found = True)
     return render_template('delete_person.html', form = delete_form, not_found = False)
