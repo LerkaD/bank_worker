@@ -267,3 +267,21 @@ table.customTable thead {
     background: #257C9E; /* Активная кнопка */
     font-weight: bold;
 }
+
+
+.form-control:invalid {
+    border-color: red;
+    box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25);
+}
+
+.alert {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}

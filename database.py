@@ -2,10 +2,9 @@ from sqlalchemy import create_engine, Column, ForeignKey, Boolean, Float  #
 from sqlalchemy.orm import sessionmaker, relationship, backref
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import Integer, Text, DATE, inspect
-from sqlalchemy import delete
-from datetime import datetime, date
 from typing import List
-
+from data_example import person_list
+from sqlalchemy import UniqueConstraint
 
 sqlite_database = "sqlite:///database.db"
 # создаем движок SqlAlchemy
@@ -30,6 +29,10 @@ class Person(Base):
     p_issued_by = Column(Text, nullable=False)
     p_issued_date = Column(DATE, nullable=False)
     p_ident_num = Column(Text, nullable=False, unique= True, primary_key= True)
+
+    __table_args__ = (
+        UniqueConstraint('passport_seria', 'passport_num', name='unique_passport'),
+    )
 
 class Cities(Base):
     __tablename__ = 'city'
@@ -56,14 +59,14 @@ class Disability(Base):
 class PersonContactInfo(Base):
     __tablename__ = 'person_contact_info'
 
-
+    id = Column(Integer, primary_key=True, autoincrement=True)
     address_residence = Column(Text, nullable= False)
     home_number = Column(Text, nullable= True)
     mobile_number = Column(Text, nullable= True)
-    e_mail = Column(Text, nullable= True, primary_key= True )
+    e_mail = Column(Text, nullable= True )
     pensioner = Column(Boolean, nullable=False, default=False)
     military_duty = Column(Boolean, nullable=False, default=False)
-    amount = Column(Float, nullable=True)
+    amount = Column(Float, nullable=True, default= None)
 
     city_id = Column(Text, ForeignKey('city.city_name'), nullable=False)
     city = relationship('Cities', uselist=False, backref=backref("person_contact_info",
@@ -100,6 +103,7 @@ def insert_data():
     ]
 
     marital_status_list = [
+        MaritalStatus(marital_type='не женат/не замужем'),
         MaritalStatus(marital_type = 'женат/замужем'),
         MaritalStatus(marital_type='разведен/разведена'),
         MaritalStatus(marital_type='вдовец/вдова')
@@ -243,6 +247,7 @@ def get_simple_pers_info():
     info = session.query(Person).all()
     return info
 
-
 # Base.metadata.create_all(bind=engine)
 # insert_data()
+# for pers in person_list:
+#     add_new_person_in_database(pers)

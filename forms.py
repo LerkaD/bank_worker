@@ -1,5 +1,3 @@
-from random import choices
-
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField,
@@ -7,14 +5,15 @@ from wtforms import (
     BooleanField,
     SubmitField,
 )
-
 from wtforms import SelectField, DecimalField
 from wtforms.fields.choices import RadioField
-from wtforms.validators import DataRequired, Email, InputRequired, NumberRange
-
+from wtforms.validators import DataRequired, Email, InputRequired, NumberRange, Optional
 from wtforms import SelectMultipleField, widgets
-
 from database import get_all_cities,get_all_citizenship, get_all_dissability, get_all_marital_status, get_mat_stat_id
+from wtforms import StringField, ValidationError
+from wtforms.validators import DataRequired, Length
+from datetime import date
+import datetime
 
 class MultiCheckboxField(SelectMultipleField):
     widget = widgets.ListWidget(prefix_label=False)
@@ -37,7 +36,7 @@ class RegistrationForm(FlaskForm):
     address_residence = StringField('Адрес проживания', validators=[DataRequired()])
     home_number = StringField('Телефон домашний')
     mobile_number = StringField('Телефон мобильный')
-    e_mail = StringField('E-mail', validators=[Email()])
+    e_mail = StringField('E-mail', validators=[Email(), Optional()], default= None)
 
     city = SelectField('Город проживания',
                        choices=[(city.city_name, city.city_name) for city in get_all_cities()],
@@ -58,16 +57,53 @@ class RegistrationForm(FlaskForm):
 
     amount = DecimalField(
         'Сумма',
-        validators=[
-            DataRequired(),
-            NumberRange(min=0.01, message='Минимальная сумма: 0.01')
-        ],
-        places=2  # Два знака после запятой
+        validators=[Optional(), NumberRange(min=0.01, message='Минимальная сумма: 0.01')],
+        places=2,
+        default=None,
+        widget=DecimalField.widget
     )
 
     military_duty = BooleanField('Военный', default= False)
 
     submit = SubmitField('Отправить')
+
+    def validate_surname(self, field):
+        if not field.data.replace("-", "").isalpha():
+            raise ValidationError('Фамилия должна содержать только буквы и дефис')
+
+    def validate_f_name(self, field):
+        if not field.data.replace("-", "").isalpha():
+            raise ValidationError('Имя должно содержать только буквы и дефис')
+
+    def validate_s_name(self, field):
+        if not field.data.isalpha():
+            raise ValidationError('Отчество должно содержать только буквы')
+
+    def validate_passport_seria(self, field):
+        if field.data.isdigit():
+            raise ValidationError('Серия должна содержать только цифры')
+
+    def validate_number(self, field):
+        if not field.data.isdigit():
+            raise ValidationError('Номер должен содержать только цифры')
+
+    def validate_birth_date(self, field):
+        if field.data > date.today():
+            raise ValidationError('Дата рождения не может быть в будущем')
+        today = date.today()
+        age = today.year - field.data.year
+
+        if (today.month, today.day) < (field.data.month, field.data.day):
+            age -= 1
+        if age < 16:
+            raise ValidationError('Возраст должен быть не менее 16 лет')
+
+    def validate_p_issued_date(self, field):
+        if field.data > datetime.date.today():
+            raise ValidationError('Дата выдачи не может быть в будущем')
+        if field.data < self.birth_date.data:
+            raise ValidationError('Дата выдачи не может быть раньше даты рождения')
+
 
 class DeleteForm(FlaskForm):
     p_ident_num = StringField('Введите идентификационный номер', validators=[DataRequired()])
@@ -94,7 +130,7 @@ class UpdateForm(FlaskForm):
     address_residence = StringField('Адрес проживания', validators=[DataRequired()])
     home_number = StringField('Телефон домашний')
     mobile_number = StringField('Телефон мобильный')
-    e_mail = StringField('E-mail', validators=[Email()])
+    e_mail = StringField('E-mail', validators=[Email(), Optional()], default= None)
 
     city = SelectField('Город проживания',
                        choices=[(city.city_name, city.city_name) for city in get_all_cities()],
@@ -115,13 +151,48 @@ class UpdateForm(FlaskForm):
 
     amount = DecimalField(
         'Сумма',
-        validators=[
-            DataRequired(),
-            NumberRange(min=0.01, message='Минимальная сумма: 0.01')
-        ],
-        places=2  # Два знака после запятой
+        validators=[Optional(), NumberRange(min=0.01, message='Минимальная сумма: 0.01')],
+        places=2,
+        default = None
     )
 
     military_duty = BooleanField('Военный', default= False)
 
     submit = SubmitField('Обновить')
+
+    def validate_surname(self, field):
+        if not field.data.replace("-", "").isalpha():
+            raise ValidationError('Фамилия должна содержать только буквы и дефис')
+
+    def validate_f_name(self, field):
+        if not field.data.replace("-", "").isalpha():
+            raise ValidationError('Имя должно содержать только буквы и дефис')
+
+    def validate_s_name(self, field):
+        if not field.data.isalpha():
+            raise ValidationError('Отчество должно содержать только буквы')
+
+    def validate_passport_seria(self, field):
+        if field.data.isdigit():
+            raise ValidationError('Серия должна содержать только цифры')
+
+    def validate_number(self, field):
+        if not field.data.isdigit():
+            raise ValidationError('Номер должен содержать только цифры')
+
+    def validate_birth_date(self, field):
+        if field.data > date.today():
+            raise ValidationError('Дата рождения не может быть в будущем')
+        today = date.today()
+        age = today.year - field.data.year
+
+        if (today.month, today.day) < (field.data.month, field.data.day):
+            age -= 1
+        if age < 16:
+            raise ValidationError('Возраст должен быть не менее 16 лет')
+
+    def validate_p_issued_date(self, field):
+        if field.data > datetime.date.today():
+            raise ValidationError('Дата выдачи не может быть в будущем')
+        if field.data < self.birth_date.data:
+            raise ValidationError('Дата выдачи не может быть раньше даты рождения')

@@ -1,81 +1,334 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="form-style-10">
-        <h1>Форма регистрации</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
+<div class="form-style-10">
+    <h1>Форма регистрации</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
 
-            <!-- Фамилия -->
-            {{ form.surname.label }} {{ form.surname() }}
-
-            <!-- Имя -->
-            {{ form.f_name.label }} {{ form.f_name() }}
-
-            <!-- Отчество -->
-            {{ form.s_name.label }} {{ form.s_name() }}
-
-            <!-- Дата рождения -->
-            {{ form.birth_date.label }} {{ form.birth_date() }}
-
-            <!-- пол -->
-            <!-- Для радиокнопок -->
-            {{ form.sex.label }}
-            {% for subfield in form.sex %}
-                {{ subfield }} {{ subfield.label }}
+        <!-- Фамилия -->
+        {{ form.surname.label }}
+        <input
+            type="text"
+            name="surname"
+            value="{{ form.surname.data or '' }}"
+            oninvalid="this.setCustomValidity('Пожалуйста, заполните поле')"
+            required>
+        {% if form.surname.errors %}
+            {% for error in form.surname.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
             {% endfor %}
+        {% endif %}
 
-            <!-- Серия паспорта -->
-            {{ form.passport_seria.label }} {{ form.passport_seria() }}
+        <!-- Имя -->
+        {{ form.f_name.label }}
+        <input
+            type="text"
+            name="f_name"
+            value="{{ form.f_name.data or '' }}"
+            oninvalid="this.setCustomValidity('Пожалуйста, заполните поле')"
+            required>
+        {% if form.f_name.errors %}
+            {% for error in form.f_name.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Номер паспорта -->
-            {{ form.passport_num.label }} {{ form.passport_num() }}
+        <!-- Отчество -->
+        {{ form.s_name.label }}
+        <input
+            type="text"
+            name="s_name"
+            value="{{ form.s_name.data or '' }}"
+            oninvalid="this.setCustomValidity('Пожалуйста, заполните поле')"
+            required>
+        {% if form.s_name.errors %}
+            {% for error in form.s_name.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Кем выдан -->
-            {{ form.p_issued_by.label }} {{ form.p_issued_by() }}
+        <!-- Дата рождения -->
+        {{ form.birth_date.label }}
+        <input
+            type="date"
+            name="birth_date"
+            value="{{ form.birth_date.data or '' }}"
+            required>
+        {% if form.birth_date.errors %}
+            {% for error in form.birth_date.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Дата выдачи -->
-            {{ form.p_issued_date.label }} {{ form.p_issued_date() }}
+        <!-- Пол -->
+        {{ form.sex.label }}
+        {% for subfield in form.sex %}
+            {{ subfield }} {{ subfield.label }}
+        {% endfor %}
+        {% if form.sex.errors %}
+            {% for error in form.sex.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Идент. номер -->
-            {{ form.p_ident_num.label }} {{ form.p_ident_num() }}
+        <!-- Серия паспорта -->
+        {{ form.passport_seria.label }}
+        <input
+            type="text"
+            name="passport_seria"
+            value="{{ form.passport_seria.data or '' }}"
+            pattern="[A-ZА-ЯЁ]{2}"
+            oninvalid="this.setCustomValidity('2 буквы')"
+            placeholder="AA"
+            required>
+        {% if form.passport_seria.errors %}
+            {% for error in form.passport_seria.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Адрес проживания -->
-            {{ form.address_residence.label }} {{ form.address_residence() }}
+        <!-- Номер паспорта -->
+        {{ form.passport_num.label }}
+        <input
+            type="text"
+            name="passport_num"
+            value="{{ form.passport_num.data or '' }}"
+            pattern="\d{7}"
+            oninvalid="this.setCustomValidity('7 цифр')"
+            placeholder="1234567"
+            required>
+        {% if form.passport_num.errors %}
+            {% for error in form.passport_num.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Телефон домашний -->
-            {{ form.home_number.label }} {{ form.home_number() }}
+        <!-- Кем выдан -->
+        {{ form.p_issued_by.label }}
+        <input
+            type="text"
+            name="p_issued_by"
+            value="{{ form.p_issued_by.data or '' }}"
+            oninvalid="this.setCustomValidity('Пожалуйста, заполните поле')"
+            required>
+        {% if form.p_issued_by.errors %}
+            {% for error in form.p_issued_by.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Телефон мобильный -->
-            {{ form.mobile_number.label }} {{ form.mobile_number() }}
+        <!-- Дата выдачи -->
+        {{ form.p_issued_date.label }}
+        <input
+            type="date"
+            name="p_issued_date"
+            value="{{ form.p_issued_date.data or '' }}"
+            required>
+        {% if form.p_issued_date.errors %}
+            {% for error in form.p_issued_date.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- E-mail -->
-            {{ form.e_mail.label }} {{ form.e_mail() }}
+        <!-- Идент. номер -->
+        {{ form.p_ident_num.label }}
+        <input
+            type="text"
+            name="p_ident_num"
+            value="{{ form.p_ident_num.data or '' }}"
+            pattern="\d{7}[A-ZА-ЯЁ]\d{3}[A-ZА-ЯЁ]{2}\d"
+            oninvalid="this.setCustomValidity('7 цифр, буква, 3 цифры, 2 буквы, цифра')"
+            placeholder="1234567A123AA1"
+            required>
+        {% if form.p_ident_num.errors %}
+            {% for error in form.p_ident_num.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Город проживания -->
-            {{ form.city.label }} {{ form.city() }}
+       <!-- Адрес проживания -->
+        {{ form.address_residence.label }}
+        <input
+            type="text"
+            name="address_residence"
+            value="{{ form.address_residence.data or ''}}"
+            placeholder="Введите адрес проживания"
+            required>
+        {% if form.address_residence.errors %}
+            {% for error in form.address_residence.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Семейное положение -->
-            {{ form.mat_stat.label }} {{ form.mat_stat() }}
+        <!-- Телефон домашний -->
+        {{ form.home_number.label }}
+        <input
+            type="tel"
+            name="home_number"
+            value="{{ form.home_number.data or '' }}"
+            pattern="801[5-7]\d{5}"
+            oninvalid="this.setCustomValidity('8015/6/7 + 5 цифр')"
+            placeholder="801712345">
+        {% if form.home_number.errors %}
+            {% for error in form.home_number.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Гражданство -->
-            {{ form.citizenship.label }} {{ form.citizenship() }}
+        <!-- Телефон мобильный -->
+        {{ form.mobile_number.label }}
+        <input
+            type="tel"
+            name="mobile_number"
+            value="{{ form.mobile_number.data or '' }}"
+            pattern="375(25|29|33|44)\d{7}"
+            oninvalid="this.setCustomValidity('37525/29/33/44 + 7 цифр')"
+            placeholder="375291234567">
+        {% if form.mobile_number.errors %}
+            {% for error in form.mobile_number.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!-- Инвалидность -->
-            {{ form.disability.label }} {{ form.disability() }}
+        <!-- E-mail -->
+        {{ form.e_mail.label }}
+        <input
+            type="email"
+            name="e_mail"
+            value="{{ form.e_mail.data or '' }}">
+        {% if form.e_mail.errors %}
+            {% for error in form.e_mail.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-             <!--пенсионер-->
-            {{ form.pensioner.label }} {{ form.pensioner() }}
+        <!-- Город проживания -->
+        {{ form.city.label }}
+        {{ form.city(class="form-control") }}
+        {% if form.city.errors %}
+            {% for error in form.city.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            <!--ЗП-->
-            {{ form.amount.label }} {{ form.amount() }}
+        <!-- Семейное положение -->
+        {{ form.mat_stat.label }}
+        {{ form.mat_stat(class="form-control") }}
+        {% if form.mat_stat.errors %}
+            {% for error in form.mat_stat.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-             <!--военный-->
-            {{ form.military_duty.label }} {{ form.military_duty() }}
+        <!-- Гражданство -->
+        {{ form.citizenship.label }}
+        {{ form.citizenship(class="form-control") }}
+        {% if form.citizenship.errors %}
+            {% for error in form.citizenship.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-            {{ form.submit() }}
+        <!-- Инвалидность -->
+        {{ form.disability.label }}
+        {{ form.disability(class="form-control") }}
+        {% if form.disability.errors %}
+            {% for error in form.disability.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
+        <!-- Пенсионер -->
+        {{ form.pensioner.label }} {{ form.pensioner() }}
+        {% if form.pensioner.errors %}
+            {% for error in form.pensioner.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
 
-        </form>
-    </div>
+        <!-- Сумма -->
+        {{ form.amount.label }}
+        <input
+            type="number"
+            name="amount"
+            value="{{ form.amount.data or '' }}"
+            step="0.01">
+        {% if form.amount.errors %}
+            {% for error in form.amount.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Военный -->
+        {{ form.military_duty.label }} {{ form.military_duty() }}
+        {% if form.military_duty.errors %}
+            {% for error in form.military_duty.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.submit(class="btn btn-primary") }}
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+
+    // Валидация при вводе
+    form.addEventListener('input', function(e) {
+        const target = e.target;
+        const name = target.name;
+
+        // Общая функция для установки валидности
+        function setValidity(isValid, message) {
+            if (isValid) {
+                target.setCustomValidity('');
+                target.style.border = '';
+            } else {
+                target.setCustomValidity(message);
+                target.style.border = '2px solid red';
+            }
+        }
+
+        // Проверка полей с именами
+        if (['surname', 'f_name', 's_name'].includes(name)) {
+            const regex = /^[А-ЯЁа-яёA-Za-z\-]+$/i;
+            setValidity(regex.test(target.value), 'Допустимы только буквы и дефис');
+        }
+
+        // Проверка серии паспорта
+        if (name === 'passport_seria') {
+            const regex = /^[A-ZА-ЯЁ]{2}$/;
+            setValidity(regex.test(target.value), '2 буквы');
+        }
+
+        // Проверка номера паспорта
+        if (name === 'passport_num') {
+            const regex = /^\d{7}$/;
+            setValidity(regex.test(target.value), '7 цифр');
+        }
+
+        // Проверка идентификационного номера
+        if (name === 'p_ident_num') {
+            const regex = /^\d{7}[A-ZА-ЯЁ]\d{3}[A-ZА-ЯЁ]{2}\d$/;
+            setValidity(regex.test(target.value), '7 цифр, буква, 3 цифры, 2 буквы, цифра');
+        }
+
+        // Проверка домашнего телефона
+        if (name === 'home_number') {
+            const regex = /^801[5-7]\d{7}$/;
+            setValidity(regex.test(target.value), '8015/6/7 + 7 цифр');
+        }
+
+        // Проверка мобильного телефона
+        if (name === 'mobile_number') {
+            const regex = /^375(25|29|33|44)\d{7}$/;
+            setValidity(regex.test(target.value), '37525/29/33/44 + 7 цифр');
+        }
+    });
+});
+</script>
+
 {% endblock %}

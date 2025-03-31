@@ -55,6 +55,7 @@ def add_person() -> str:
             return redirect('/persons')
         else:
             print("Ошибки валидации:", add_form.errors)
+            return render_template('add_person.html', form=add_form)
     return render_template('add_person.html', form = add_form)
 
 @app.route('/person/delete', methods=['GET', 'POST'])
@@ -114,6 +115,7 @@ def update_person_info_by_ident(ident_num: str)-> str:
             redirect('/persons')
         else:
             print("Ошибки валидации:", update_form.errors)
+            return render_template('update_person_info_by_ident.html', form=update_form)
     return render_template('update_person_info_by_ident.html', form=update_form)
 
 
