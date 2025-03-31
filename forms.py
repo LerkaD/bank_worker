@@ -9,7 +9,8 @@ from wtforms import SelectField, DecimalField
 from wtforms.fields.choices import RadioField
 from wtforms.validators import DataRequired, Email, InputRequired, NumberRange, Optional
 from wtforms import SelectMultipleField, widgets
-from database import get_all_cities,get_all_citizenship, get_all_dissability, get_all_marital_status, get_mat_stat_id
+from database import get_all_cities, get_all_citizenship, get_all_dissability, get_all_marital_status, get_mat_stat_id, \
+    check_unique_seria_num
 from wtforms import StringField, ValidationError
 from wtforms.validators import DataRequired, Length
 from datetime import date
@@ -104,6 +105,19 @@ class RegistrationForm(FlaskForm):
         if field.data < self.birth_date.data:
             raise ValidationError('Дата выдачи не может быть раньше даты рождения')
 
+    def validate(self, extra_validators=None):
+        initial_validation = super(RegistrationForm, self).validate()
+        if not initial_validation:
+            return False
+
+        uniq_person = check_unique_seria_num(self.passport_seria.data,self.passport_num.data)
+        if not uniq_person:
+            self.passport_seria.errors.append('Серия и номер паспорта уже зарегистрированы')
+            self.passport_num.errors.append('Серия и номер паспорта уже зарегистрированы')
+            return False
+
+        return True
+
 
 class DeleteForm(FlaskForm):
     p_ident_num = StringField('Введите идентификационный номер', validators=[DataRequired()])
@@ -196,3 +210,16 @@ class UpdateForm(FlaskForm):
             raise ValidationError('Дата выдачи не может быть в будущем')
         if field.data < self.birth_date.data:
             raise ValidationError('Дата выдачи не может быть раньше даты рождения')
+
+    def validate(self, extra_validators=None):
+        initial_validation = super(RegistrationForm, self).validate()
+        if not initial_validation:
+            return False
+
+        uniq_person = check_unique_seria_num(self.passport_seria.data,self.passport_num.data)
+        if not uniq_person:
+            self.passport_seria.errors.append('Серия и номер паспорта уже зарегистрированы')
+            self.passport_num.errors.append('Серия и номер паспорта уже зарегистрированы')
+            return False
+
+        return True

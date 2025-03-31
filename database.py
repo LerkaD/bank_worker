@@ -247,6 +247,15 @@ def get_simple_pers_info():
     info = session.query(Person).all()
     return info
 
+def check_unique_seria_num(passport_seria: str,passport_num:str )-> bool:
+    person = session.query(Person).filter(Person.passport_seria== passport_seria,
+                           Person.passport_num== passport_num).first
+    if person:
+        return False
+    else:
+        return True
+
+
 # Base.metadata.create_all(bind=engine)
 # insert_data()
 # for pers in person_list:
