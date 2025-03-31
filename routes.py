@@ -112,7 +112,7 @@ def update_person_info_by_ident(ident_num: str)-> str:
                 "military_duty": update_form.military_duty.data
             }
             update_person_in_database(ident_num, update_person_data)
-            redirect('/persons')
+            return redirect('/persons')
         else:
             print("Ошибки валидации:", update_form.errors)
             return render_template('update_person_info_by_ident.html', form=update_form)

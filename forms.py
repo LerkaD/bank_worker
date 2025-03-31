@@ -212,7 +212,7 @@ class UpdateForm(FlaskForm):
             raise ValidationError('Дата выдачи не может быть раньше даты рождения')
 
     def validate(self, extra_validators=None):
-        initial_validation = super(RegistrationForm, self).validate()
+        initial_validation = super(UpdateForm, self).validate()
         if not initial_validation:
             return False
 
