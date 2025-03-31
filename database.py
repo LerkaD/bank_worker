@@ -249,8 +249,10 @@ def get_simple_pers_info():
 
 def check_unique_seria_num(passport_seria: str,passport_num:str )-> bool:
     person = session.query(Person).filter(Person.passport_seria== passport_seria,
-                           Person.passport_num== passport_num).first
+                           Person.passport_num== passport_num).first()
+    # print(person.passport_num, person.passport_seria)
     if person:
+        print(person.passport_num, person.passport_seria)
         return False
     else:
         return True

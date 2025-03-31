@@ -247,6 +247,14 @@
             {% endfor %}
         {% endif %}
 
+        <!-- Военный -->
+        {{ form.military_duty.label }} {{ form.military_duty() }}
+        {% if form.military_duty.errors %}
+            {% for error in form.military_duty.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+
         <!-- Сумма -->
         {{ form.amount.label }}
         <input
@@ -256,14 +264,6 @@
             step="0.01">
         {% if form.amount.errors %}
             {% for error in form.amount.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-
-        <!-- Военный -->
-        {{ form.military_duty.label }} {{ form.military_duty() }}
-        {% if form.military_duty.errors %}
-            {% for error in form.military_duty.errors %}
                 <div class="alert alert-danger">{{ error }}</div>
             {% endfor %}
         {% endif %}
