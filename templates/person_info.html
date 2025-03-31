@@ -11,6 +11,9 @@
             <th>Имя</th>
             <th>Отчество</th>
             <th>Идент. №</th>
+            <th>Паспорт. серия</th>
+            <th>Паспорт. №</th>
+            <th>Дата рождения</th>
         </tr>
         </thead>
         <tbody>
@@ -27,6 +30,15 @@
             </td>
             <td>
                 {{ person.p_ident_num }}
+            </td>
+            <td>
+                {{ person.passport_seria }}
+            </td>
+            <td>
+                {{ person.passport_num }}
+            </td>
+            <td>
+                {{ person.birth_date }}
             </td>
         </tr>
         {% endfor %}
